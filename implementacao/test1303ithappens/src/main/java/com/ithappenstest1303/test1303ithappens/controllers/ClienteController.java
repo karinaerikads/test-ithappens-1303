@@ -7,9 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ithappenstest1303.test1303ithappens.models.Cliente;
+import com.ithappenstest1303.test1303ithappens.models.Usuario;
 import com.ithappenstest1303.test1303ithappens.repository.ClienteRepository;
 
 @Controller
@@ -34,5 +36,14 @@ public class ClienteController {
 	@RequestMapping(value="/cadastroCliente", method = RequestMethod.GET) //Get pois irá retornar o formulário
 	public String form(){
 		return "cadastroCliente";
+	}
+	
+	//Requisição para mostrar toda lista de clientes
+	@RequestMapping("/listaClientes")
+	public ModelAndView listaClientes(){
+		ModelAndView mv = new ModelAndView("listaClientes");
+		Iterable<Cliente> clientes = cr.findAll();
+		mv.addObject("clientes", clientes);
+		return mv;
 	}
 }
