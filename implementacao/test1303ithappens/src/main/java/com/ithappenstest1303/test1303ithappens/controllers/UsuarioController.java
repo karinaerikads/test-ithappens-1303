@@ -22,7 +22,6 @@ public class UsuarioController {
 	private UsuarioRepository ur;
 	
 	//Retorna lista de usuário
-	
 	@RequestMapping("/usuarios")
 	public ModelAndView listaUsuarios(){
 		ModelAndView mv = new ModelAndView("usuarios");

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ithappenstest1303.test1303ithappens.models.Filial;
@@ -37,6 +38,15 @@ public class FilialController {
 	@RequestMapping(value="/cadastroFilial", method = RequestMethod.GET) //Get pois irá retornar o formulário
 	public String form(){
 		return "cadastroFilial";
+	}
+	
+	//Retorna lista com todas as filiais
+	@RequestMapping("/listaFiliais")
+	public ModelAndView listaFiliais(){
+		ModelAndView mv = new ModelAndView("listaFiliais");
+		Iterable<Filial> filiais = fr.findAll();
+		mv.addObject("filiais", filiais);
+		return mv;
 	}
 		
 	

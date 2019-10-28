@@ -27,6 +27,17 @@ public class Filial implements Serializable{
 	private String numero;
 	@NotEmpty //Não permite que o campo fique vazio
 	private String telefone;
+	@NotEmpty //Não permite que o campo fique vazio
+	private String bairro;
+	
+	
+	
+	public String getBairro() {
+		return bairro;
+	}
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
 	public long getCodigo() {
 		return codigo;
 	}
