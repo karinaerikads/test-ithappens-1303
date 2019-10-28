@@ -35,6 +35,31 @@ public class PedidoEstoqueController {
 		return "funcionalidades/pedidoEstoque";
 	}
 	
+	//Requisição para retornar o formulário com lista de pedidos
+	/*
+	@RequestMapping(value="/listaDePedidos", method = RequestMethod.GET) //Get pois irá retornar o formulário
+	public String formListaPedidos(){
+		return "funcionalidades/listaPedidos";
+	}*/
+	
+	//Retorna lista de pedidos
+	
+		@RequestMapping("/listaDePedidos")
+		public ModelAndView listaPedidos(){
+			//mostra a página que ele vai redenrizar os dados do pedido
+			ModelAndView mv = new ModelAndView("listaPedidos");
+			Iterable<PedidoEstoque> pedidoestoques = per.findAll(); //Trás do banco todos os pedidos cadastrados
+			//Passa lista de pedidos para a view
+			mv.addObject("pedidoestoques", pedidoestoques);
+			
+			return mv;
+		}
+	
+
+	
+	
+	
+	
 	//Busca produto por sequencial
 	@RequestMapping(value="/pedidoEstoque/{sequencial}", method=RequestMethod.GET)
 	public ModelAndView buscarProduto(@PathVariable("sequencial") long sequencial) {
@@ -43,6 +68,29 @@ public class PedidoEstoqueController {
 		mv.addObject("produto", produto);
 		return mv;
 	}
+	
+	
+	/*
+	@RequestMapping(value="/pedidoEstoque/{codigoproduto}/{codpedido}", method=RequestMethod.POST)
+	public String detalhesEventoPost (@PathVariable("codigoprod") long codigoprod, @PathVariable("codpedido") long codpedido, @Valid ItensPedido itensPedido, BindingResult result, RedirectAttributes attributes){
+		if(result.hasErrors()){
+			attributes.addFlashAttribute("mensagem", "Verifique os campos!");
+			return "redirect:/pedidoEstoque";
+		}
+		
+		PedidoEstoque pedidoEstoque = per.findByCodigo(codpedido);
+		Produto produto = pr.findByCodigo(codigoprod);
+		itensPedido.setPedidoestoque(pedidoEstoque);
+		itensPedido.setProduto(produto);
+		
+		ipr.save(itensPedido);
+
+		attributes.addFlashAttribute("mensagem", "Convidado adicionado com sucesso!");
+		return "redirect:/{codigo}";
+
+	}*/
+	
+	
 	
 	//Requisição para salvar os dados do pedido no banco de dados
 		@RequestMapping(value="/pedidoEstoque", method = RequestMethod.POST) 

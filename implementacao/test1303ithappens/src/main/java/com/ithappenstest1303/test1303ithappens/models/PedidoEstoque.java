@@ -16,7 +16,7 @@ public class PedidoEstoque implements Serializable {
 	@NotEmpty //Não permite que o campo fique vazio
 	private long codigo;
 	@NotEmpty //Não permite que o campo fique vazio
-	private String observação;
+	private String observacao;
 	@NotEmpty //Não permite que o campo fique vazio
 	private int tipo;
 	@NotEmpty //Não permite que o campo fique vazio
@@ -30,16 +30,34 @@ public class PedidoEstoque implements Serializable {
 	private Usuario Usuario;
 */
 
-	public String getObservação() {
-		return observação;
-	}
 
-	public void setObservação(String observação) {
-		this.observação = observação;
-	}
 
 	public int getTipo() {
 		return tipo;
+	}
+
+	public long getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+	public String getObservacao() {
+		return observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
+	}
+
+	public List<ItensPedido> getItenspedido() {
+		return itenspedido;
+	}
+
+	public void setItenspedido(List<ItensPedido> itenspedido) {
+		this.itenspedido = itenspedido;
 	}
 
 	public void setTipo(int tipo) {
