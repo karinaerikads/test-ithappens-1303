@@ -5,11 +5,14 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.ithappenstest1303.test1303ithappens.models.Filial;
 import com.ithappenstest1303.test1303ithappens.models.Usuario;
 import com.ithappenstest1303.test1303ithappens.repository.UsuarioRepository;
 
@@ -51,18 +54,12 @@ public class UsuarioController {
 	
 		
 		
-		
-	/*
-	//Retorna lista de eventos
-		@RequestMapping("/eventos")
-		public ModelAndView listaEventos(){
-			//mostra a página que ele vai redenrizar os dados do evento
-			ModelAndView mv = new ModelAndView("listaEventos");
-			Iterable<Evento> eventos = er.findAll(); //Trás do banco todos os eventos cadastrados
-			//Passa lista de eventos para a view
-			mv.addObject("eventos", eventos);
-			
-			return mv;
-		}
-		*/
+	//Deleta usuario específico
+	@GetMapping("/deletausuario/{codigo}")
+	public ModelAndView delete(@PathVariable("codigo") Long codigo) {
+		Usuario usuario = ur.findByCodigo(codigo);
+		ur.delete(usuario);
+		ModelAndView modelAndView = new ModelAndView("redirect:/usuarios");
+		return modelAndView;
+	}
 }

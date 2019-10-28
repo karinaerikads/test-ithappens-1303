@@ -5,15 +5,16 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ithappenstest1303.test1303ithappens.models.Filial;
-import com.ithappenstest1303.test1303ithappens.models.Usuario;
 import com.ithappenstest1303.test1303ithappens.repository.FilialRepository;
-import com.ithappenstest1303.test1303ithappens.repository.UsuarioRepository;
 
 @Controller
 public class FilialController {
@@ -48,6 +49,17 @@ public class FilialController {
 		mv.addObject("filiais", filiais);
 		return mv;
 	}
+	
+	
+	//Deleta uma filial específica
+	@GetMapping("/delete/{id}")
+	public ModelAndView delete(@PathVariable("id") Long id) {
+		Filial filial = fr.findByCodigo(id);
+		fr.delete(filial);
+		ModelAndView modelAndView = new ModelAndView("redirect:/listaFiliais");
 		
+		
+		return modelAndView;
+	}
 	
 }
