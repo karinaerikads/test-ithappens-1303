@@ -30,6 +30,7 @@
 		 		<th>CPF</th>
 		 		<th>Email</th>
 		 		<th>Nome</th>
+		 		<th>Cadastrar pedido</th>
 		 		<th>Deletar</th>
 
 		 	</tr>
@@ -44,6 +45,14 @@
 				<td><span th:text="${usuario.cpf}"></span></td>
 				<td><span th:text="${usuario.email}"></span></td>
 				<td><span th:text="${usuario.nome}"></span></td>
+				
+				
+				<!--<td><a th:href="${(#mvc.url('EC#cadastroPedido').arg(0, usuario.codigo)).build()}"><span th:text="${usuario.nome}"></span></a></td>
+				 -->
+				
+				<td><a class="waves-effect waves-light small" th:href="@{/{codigo}(codigo=${usuario.codigo})}"><i class="material-icons left">add</i></a></td>
+				
+				
 				<td><a class="waves-effect waves-light small" th:href="@{/deletausuario/{codigo}(codigo=${usuario.codigo})}"><i class="material-icons left">delete</i></a></td>
 				
 				

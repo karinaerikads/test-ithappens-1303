@@ -33,11 +33,6 @@ public class Produto implements Serializable {
 	@OneToMany( mappedBy="produto", cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<ItensPedido> itenspedido;
 
-	
-
-
-
-
 	public long getSequencial() {
 		return sequencial;
 	}

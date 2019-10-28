@@ -30,12 +30,18 @@ public class PedidoEstoque implements Serializable {
 	//Um pedido_estoque para muitos itens_pedido
 	@OneToMany( mappedBy="pedidoestoque", cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<ItensPedido> itenspedido;
-	/*
-	@ManyToOne 
-	private Usuario Usuario;
-*/
 
+	@ManyToOne //Muitos pedidos_estoque um usuário
+	private Usuario usuario;
 
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 
 	public int getTipo() {
 		return tipo;
@@ -64,8 +70,6 @@ public class PedidoEstoque implements Serializable {
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
-
-
 
 	public List<ItensPedido> getItenspedido() {
 		return itenspedido;

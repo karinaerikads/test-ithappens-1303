@@ -24,6 +24,18 @@ private static final long serialVersionUID = 1L;
 	private String nome;
 	@NotEmpty //Não permite que o campo fique vazio
 	private String cpf;
+
+	//Um usuário para muitos pedidos_estoques
+	@OneToMany( mappedBy="usuario", cascade=CascadeType.ALL, orphanRemoval=true)
+	private List<PedidoEstoque> pedidoestoque;
+	
+	
+	public List<PedidoEstoque> getPedidoestoque() {
+		return pedidoestoque;
+	}
+	public void setPedidoestoque(List<PedidoEstoque> pedidoestoque) {
+		this.pedidoestoque = pedidoestoque;
+	}
 	public long getCodigo() {
 		return codigo;
 	}
@@ -49,9 +61,7 @@ private static final long serialVersionUID = 1L;
 		this.cpf = cpf;
 	}
 	
-	//Um usuário para muitos pedido_estoque
-	/*@OneToMany( mappedBy="usuario", cascade=CascadeType.ALL, orphanRemoval=true)
-	private List<PedidoEstoque> pedidoestoque;*/
+
 	
 	
 }
