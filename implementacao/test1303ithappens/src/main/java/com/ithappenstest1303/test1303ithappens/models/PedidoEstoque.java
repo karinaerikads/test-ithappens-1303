@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -13,8 +15,10 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 public class PedidoEstoque implements Serializable {
+	private static final long serialVersionUID = 1L; 
+	
 	@Id //É a chave primária
-	@NotNull //Não permite que o campo fique vazio
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long codigo;
 	@NotEmpty //Não permite que o campo fique vazio
 	private String observacao;
@@ -25,7 +29,7 @@ public class PedidoEstoque implements Serializable {
 	
 	//Um pedido_estoque para muitos itens_pedido
 	@OneToMany( mappedBy="pedidoestoque", cascade=CascadeType.ALL, orphanRemoval=true)
-	private List<ItensPedido> itenspedidos;
+	private List<ItensPedido> itenspedido;
 	/*
 	@ManyToOne 
 	private Usuario Usuario;
@@ -61,12 +65,14 @@ public class PedidoEstoque implements Serializable {
 		this.observacao = observacao;
 	}
 
-	public List<ItensPedido> getItenspedidos() {
-		return itenspedidos;
+
+
+	public List<ItensPedido> getItenspedido() {
+		return itenspedido;
 	}
 
-	public void setItenspedidos(List<ItensPedido> itenspedidos) {
-		this.itenspedidos = itenspedidos;
+	public void setItenspedido(List<ItensPedido> itenspedido) {
+		this.itenspedido = itenspedido;
 	}
 
 	public void setTipo(int tipo) {
