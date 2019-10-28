@@ -24,8 +24,34 @@ private static final long serialVersionUID = 1L;
 	private String nome;
 	@NotEmpty //Não permite que o campo fique vazio
 	private String cpf;
+	public long getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public String getCpf() {
+		return cpf;
+	}
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
 	
 	//Um usuário para muitos pedido_estoque
 	/*@OneToMany( mappedBy="usuario", cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<PedidoEstoque> pedidoestoque;*/
+	
+	
 }

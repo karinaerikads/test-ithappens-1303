@@ -26,7 +26,9 @@ public class PedidoEstoqueController {
 	//Criar uma injeção de independência, ou seja, sempre que precisar usar a interface, então será criado uma nova instância
 	@Autowired 	
 	private ProdutoRepository pr;
+	@Autowired 
 	private ItensPedidoRepository ipr;
+	@Autowired 
 	private PedidoEstoqueRepository per;
 
 	//Requisição para retornar o formulário
@@ -44,13 +46,13 @@ public class PedidoEstoqueController {
 	
 	//Retorna lista de pedidos
 	
-		@RequestMapping("/listaDePedidos")
+		@RequestMapping("/listaPedidos")
 		public ModelAndView listaPedidos(){
 			//mostra a página que ele vai redenrizar os dados do pedido
 			ModelAndView mv = new ModelAndView("listaPedidos");
-			Iterable<PedidoEstoque> pedidoestoques = per.findAll(); //Trás do banco todos os pedidos cadastrados
+			Iterable<PedidoEstoque> pedidoestoque = per.findAll(); //Trás do banco todos os pedidos cadastrados
 			//Passa lista de pedidos para a view
-			mv.addObject("pedidoestoques", pedidoestoques);
+			mv.addObject("pedidoestoque", pedidoestoque);
 			
 			return mv;
 		}

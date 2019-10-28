@@ -9,22 +9,23 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class PedidoEstoque implements Serializable {
 	@Id //É a chave primária
-	@NotEmpty //Não permite que o campo fique vazio
+	@NotNull //Não permite que o campo fique vazio
 	private long codigo;
 	@NotEmpty //Não permite que o campo fique vazio
 	private String observacao;
-	@NotEmpty //Não permite que o campo fique vazio
+	@NotNull //Não permite que o campo fique vazio
 	private int tipo;
-	@NotEmpty //Não permite que o campo fique vazio
-	private double valor_total;
+	@NotNull //Não permite que o campo fique vazio
+	private double valortotal;
 	
 	//Um pedido_estoque para muitos itens_pedido
 	@OneToMany( mappedBy="pedidoestoque", cascade=CascadeType.ALL, orphanRemoval=true)
-	private List<ItensPedido> itenspedido;
+	private List<ItensPedido> itenspedidos;
 	/*
 	@ManyToOne 
 	private Usuario Usuario;
@@ -34,6 +35,14 @@ public class PedidoEstoque implements Serializable {
 
 	public int getTipo() {
 		return tipo;
+	}
+
+	public double getValortotal() {
+		return valortotal;
+	}
+
+	public void setValortotal(double valortotal) {
+		this.valortotal = valortotal;
 	}
 
 	public long getCodigo() {
@@ -52,24 +61,16 @@ public class PedidoEstoque implements Serializable {
 		this.observacao = observacao;
 	}
 
-	public List<ItensPedido> getItenspedido() {
-		return itenspedido;
+	public List<ItensPedido> getItenspedidos() {
+		return itenspedidos;
 	}
 
-	public void setItenspedido(List<ItensPedido> itenspedido) {
-		this.itenspedido = itenspedido;
+	public void setItenspedidos(List<ItensPedido> itenspedidos) {
+		this.itenspedidos = itenspedidos;
 	}
 
 	public void setTipo(int tipo) {
 		this.tipo = tipo;
-	}
-
-	public double getValor_total() {
-		return valor_total;
-	}
-
-	public void setValor_total(double valor_total) {
-		this.valor_total = valor_total;
 	}
 
 
