@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+
+	<meta charset="UTF-8">
+	<!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    <link rel="stylesheet" href="style/styleCss.css">
+    
+	
+</head>
+
+<body>
+	<div th:insert="~{menu :: menupag}"></div>
+	
+	<h5 class="center">Cadastrar Filial</h5>
+	
+	<th:block th:include='mensagemValidacao'></th:block>
+	<div class="container form">
+		<form class="container" method="post">
+			
+			<div class="row">
+				<div class="input-field col s6">
+					Cidade: <input type="text" value="" name="cidade"/>
+				</div>
+				<div class="input-field col s6">
+					Estado: <input type="text" value="" name="estado"/>
+				</div>
+				<div class="input-field col s6">
+					Nome: <input type="text" value="" name="nome"/>
+				</div>
+				<div class="input-field col s6">
+					Numero: <input type="text" value="" name="numero"/>
+				</div>
+				<div class="input-field col s6">
+					Rua: <input type="text" value="" name="rua"/>
+				</div>
+				<div class="input-field col s6">
+					Telefone: <input type="text" value="" name="telefone"/>
+				</div>
+			</div>
+			<button class="waves-effect waves-light btn" type="submit">Salvar</button>
+			
+		</form>
+	</div>
+	<!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+</body>
+</html>
