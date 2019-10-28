@@ -23,9 +23,9 @@ public class Produto implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long codigo;
 	@NotEmpty //Não permite que o campo fique vazio
-	private String sequencial;
+	private long sequencial;
 	@NotEmpty //Não permite que o campo fique vazio
-	private String cod_barras;
+	private String codbarras;
 	@NotEmpty //Não permite que o campo fique vazio
 	private String descricao;
 	
@@ -33,22 +33,17 @@ public class Produto implements Serializable {
 	@OneToMany( mappedBy="produto", cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<ItensPedido> itenspedido;
 
+	
 
 
-	public String getSequencial() {
+
+
+	public long getSequencial() {
 		return sequencial;
 	}
 
-	public void setSequencial(String sequencial) {
+	public void setSequencial(long sequencial) {
 		this.sequencial = sequencial;
-	}
-
-	public String getCod_barras() {
-		return cod_barras;
-	}
-
-	public void setCod_barras(String cod_barras) {
-		this.cod_barras = cod_barras;
 	}
 
 	public String getDescricao() {
@@ -59,7 +54,20 @@ public class Produto implements Serializable {
 		this.descricao = descricao;
 	}
 
+	public long getCodigo() {
+		return codigo;
+	}
 
-	
+	public void setCodigo(long codigo) {
+		this.codigo = codigo;
+	}
+
+	public List<ItensPedido> getItenspedido() {
+		return itenspedido;
+	}
+
+	public void setItenspedido(List<ItensPedido> itenspedido) {
+		this.itenspedido = itenspedido;
+	}
 
 }

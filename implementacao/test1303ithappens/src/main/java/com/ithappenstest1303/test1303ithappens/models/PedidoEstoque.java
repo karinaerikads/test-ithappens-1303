@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 
@@ -24,8 +25,10 @@ public class PedidoEstoque implements Serializable {
 	//Um pedido_estoque para muitos itens_pedido
 	@OneToMany( mappedBy="pedidoestoque", cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<ItensPedido> itenspedido;
-
-
+	/*
+	@ManyToOne 
+	private Usuario Usuario;
+*/
 
 	public String getObservação() {
 		return observação;
