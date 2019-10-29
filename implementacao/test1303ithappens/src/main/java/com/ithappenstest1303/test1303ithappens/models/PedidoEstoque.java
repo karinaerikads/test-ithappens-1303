@@ -33,8 +33,20 @@ public class PedidoEstoque implements Serializable {
 
 	@ManyToOne //Muitos pedidos_estoque um usuário
 	private Usuario usuario;
+	
+	@ManyToOne //Muitos pedidos_estoque um cliente
+	private Cliente cliente;
 
 	
+	
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
 	public Usuario getUsuario() {
 		return usuario;
 	}

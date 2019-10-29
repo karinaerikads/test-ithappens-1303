@@ -113,6 +113,8 @@ public class PedidoEstoqueController {
 
 	}
 	
+
+	
 	//vai salvar o cadastro do pedido
 	@RequestMapping(value="/{codigo}", method=RequestMethod.POST)
 	public String salvaPedidoEstoque(@PathVariable("codigo") long codigo, @Valid PedidoEstoque pedidoestoque,  BindingResult result, RedirectAttributes attributes){
@@ -128,33 +130,6 @@ public class PedidoEstoqueController {
 		return "redirect:/{codigo}";
 	}
 	
-	/*
-	@RequestMapping(value="/{codigo}", method=RequestMethod.GET)
-	public ModelAndView detalhesEvento (@PathVariable("codigo") long codigo){
-		Evento evento = er.findByCodigo(codigo);
-		ModelAndView mv = new ModelAndView("evento/detalhesEvento");
-		mv.addObject("evento", evento);
-		
-		//Mostra a lista de convidados do evento
-		Iterable<Convidado> convidados = cr.findByEvento(evento);
-		mv.addObject("convidados", convidados);
-		return mv;
-
-	}*/
-	
-	
-		
-	
-	//Deleta usuario específico
-	/*
-		@GetMapping("/deletausuario/{codigo}")
-		public ModelAndView delete(@PathVariable("codigo") Long codigo) {
-			Usuario usuario = ur.findByCodigo(codigo);
-			ur.delete(usuario);
-			ModelAndView modelAndView = new ModelAndView("redirect:/usuarios");
-			return modelAndView;
-		}*/
-	
 	
 	//Busca produto por sequencial
 	@RequestMapping(value="/pedidoEstoque/{sequencial}", method=RequestMethod.GET)
@@ -164,28 +139,6 @@ public class PedidoEstoqueController {
 		mv.addObject("produto", produto);
 		return mv;
 	}
-	
-	
-	/*
-	@RequestMapping(value="/pedidoEstoque/{codigoproduto}/{codpedido}", method=RequestMethod.POST)
-	public String detalhesEventoPost (@PathVariable("codigoprod") long codigoprod, @PathVariable("codpedido") long codpedido, @Valid ItensPedido itensPedido, BindingResult result, RedirectAttributes attributes){
-		if(result.hasErrors()){
-			attributes.addFlashAttribute("mensagem", "Verifique os campos!");
-			return "redirect:/pedidoEstoque";
-		}
-		
-		PedidoEstoque pedidoEstoque = per.findByCodigo(codpedido);
-		Produto produto = pr.findByCodigo(codigoprod);
-		itensPedido.setPedidoestoque(pedidoEstoque);
-		itensPedido.setProduto(produto);
-		
-		ipr.save(itensPedido);
-
-		attributes.addFlashAttribute("mensagem", "Convidado adicionado com sucesso!");
-		return "redirect:/{codigo}";
-
-	}*/
-	
 	
 	
 	//Requisição para salvar os dados do pedido no banco de dados
@@ -202,28 +155,6 @@ public class PedidoEstoqueController {
 			attributes.addFlashAttribute("mensagem", "Pedido cadastrado com sucesso!");
 			return "redirect:/cadastrarEvento";
 		}
-	
-	//Busca produto por descricao
-	/*
-	@RequestMapping(value="/pedidoEstoque/{descricao}", method=RequestMethod.GET)
-	public ModelAndView buscarProduto(@PathVariable("descricao") long descricao) {
-		Produto produto = pr.findByDescricao(descricao);
-		ModelAndView mv = new ModelAndView("funcionalidades/pedidoEstoque");
-		mv.addObject("produto", produto);
-		return mv;
-
-	}*/
-	
-	//Busca produto por código de barras
-	/*
-	@RequestMapping(value="/pedidoEstoque/{cod_barras}", method=RequestMethod.GET)
-	public ModelAndView buscarProduto(@PathVariable("descricao") String descricao) {
-		Produto produto = pr.findByDescricao(descricao);
-		ModelAndView mv = new ModelAndView("funcionalidades/pedidoEstoque");
-		mv.addObject("produto", produto);
-		return mv;
-
-	}*/
 	
 		
 }

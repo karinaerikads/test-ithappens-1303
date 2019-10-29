@@ -1,11 +1,14 @@
 package com.ithappenstest1303.test1303ithappens.models;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
@@ -22,6 +25,13 @@ private static final long serialVersionUID = 1L;
 	private String cnpj;
 	@NotEmpty //Não permite que o campo fique vazio
 	private String telefone;
+	
+	//Um cliente para muitos pedidos_estoques
+	@OneToMany( mappedBy="cliente", cascade=CascadeType.ALL, orphanRemoval=true)
+	private List<PedidoEstoque> pedidoestoque;
+		
+	
+	
 	public long getCodigo() {
 		return codigo;
 	}
