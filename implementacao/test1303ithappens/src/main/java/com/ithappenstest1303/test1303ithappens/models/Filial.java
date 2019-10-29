@@ -1,11 +1,14 @@
 package com.ithappenstest1303.test1303ithappens.models;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
@@ -30,8 +33,17 @@ public class Filial implements Serializable{
 	@NotEmpty //Não permite que o campo fique vazio
 	private String bairro;
 	
+	//Uma filial para muitos pedidos_estoques
+	@OneToMany( mappedBy="filial", cascade=CascadeType.ALL, orphanRemoval=true)
+	private List<PedidoEstoque> pedidoestoque;
+			
 	
-	
+	public List<PedidoEstoque> getPedidoestoque() {
+		return pedidoestoque;
+	}
+	public void setPedidoestoque(List<PedidoEstoque> pedidoestoque) {
+		this.pedidoestoque = pedidoestoque;
+	}
 	public String getBairro() {
 		return bairro;
 	}
