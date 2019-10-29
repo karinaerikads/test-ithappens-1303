@@ -57,6 +57,15 @@ public class Produto implements Serializable {
 		this.codigo = codigo;
 	}
 
+	
+	public String getCodbarras() {
+		return codbarras;
+	}
+
+	public void setCodbarras(String codbarras) {
+		this.codbarras = codbarras;
+	}
+
 	public List<ItensPedido> getItenspedido() {
 		return itenspedido;
 	}

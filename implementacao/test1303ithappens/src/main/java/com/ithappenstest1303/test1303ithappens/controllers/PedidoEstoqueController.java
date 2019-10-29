@@ -32,8 +32,6 @@ public class PedidoEstoqueController {
 	@Autowired 	
 	private ProdutoRepository pr;
 	@Autowired 
-	private ItensPedidoRepository ipr;
-	@Autowired 
 	private PedidoEstoqueRepository per;
 	@Autowired 
 	private UsuarioRepository ur;
@@ -69,7 +67,7 @@ public class PedidoEstoqueController {
 		return mv;
 	}
 	
-	@RequestMapping(value="cadastroPedido/{codigousuario}/{codigocliente}/{codigofilial}", method=RequestMethod.POST)
+	@RequestMapping(value="/cadastroPedido/{codigousuario}/{codigocliente}/{codigofilial}", method=RequestMethod.POST)
 	public String salvaPedidoEstoque(@PathVariable("codigousuario") long codigousuario, @PathVariable("codigocliente") long codigocliente, @PathVariable("codigofilial") long codigofilial, @Valid PedidoEstoque pedidoestoque, BindingResult result, RedirectAttributes attributes){
 		if(result.hasErrors()){
 			attributes.addFlashAttribute("mensagem", "Verifique os campos!");

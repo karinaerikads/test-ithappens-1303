@@ -6,9 +6,9 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	
 	<!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link th:href="@{/https://fonts.googleapis.com/icon?family=Material+Icons}" rel="stylesheet">
     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/materialize/css/materialize.min.css}"  media="screen,projection"/>
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -16,13 +16,12 @@
 <body>
 	<div th:insert="~{menu :: menupag}"></div>
 	
-	<h5 class="center">Cadastro de Pedido</h5>
+	
 	
 	<th:block th:include='mensagemValidacao'></th:block>
 	
 	<div class="container form">
 		<form class="container" method="post">
-			Produto: <input type="text" value="" name="nome"/>
 			
 			<h5 class="center">Produtos</h5>
 			 <table class="container striped">
@@ -31,29 +30,34 @@
 				 		<th>Codigo</th>
 				 		<th>Descricao</th>
 				 		<th>Sequencial</th>
+				 		<th>Código de barras</th>
 				 		
 				 	</tr>
 				 </thead>
 				 
 				 <tbody>
-				 	<tr th:each="produto: ${produto}">
+				 	<tr th:each="produto: ${produtos}">
 				 	<!-- 
 				 		<td><a th:href="${(#mvc.url('EC#detalhesEvento').arg(0, evento.codigo)).build()}"><span th:text="${evento.nome}"></span></a></td> -->
 						<td><span th:text="${produto.codigo}"></span></td>
 						<td><span th:text="${produto.descricao}"></span></td>
 						<td><span th:text="${produto.sequencial}"></span></td>
+						 
+						<td><span th:text="${produto.codbarras}"></span></td>
+						 
 						
 						
 					</tr>
 				 </tbody>	 
 			</table>
 			
-			Valor Unitário: <input type="text" value="" name="valor_unitario"/>
+			<h5 class="center">Cadastro itens do pedido</h5>
+			
+			Valor Unitário: <input type="text" value="" name="valorunitario"/>
 			Quantidade: <input type="number" value="" name="quantidade"/>
-			Cod produto: <input type="text" value="2" id="produto_codigo" name="produto_codigo"/>
 			
 			<!-- Cod produto: <input type="text" th:value="${produto.codigo}" id="produto_codigo" name="produto_codigo"/> -->
-			Cod Pedido_estoque: <input type="text" value="1" name="pedidoestoque_codigo"/>
+			
 			
 			<!-- 
 			<div class="row">

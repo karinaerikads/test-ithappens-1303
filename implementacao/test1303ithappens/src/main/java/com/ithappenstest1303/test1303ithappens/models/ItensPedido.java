@@ -2,6 +2,8 @@ package com.ithappenstest1303.test1303ithappens.models;
 
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
@@ -12,12 +14,12 @@ import com.sun.istack.NotNull;
 public class ItensPedido {
 
 	@Id //É a chave primária
-	@NotNull //Não permite que o campo fique vazio
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long codigo;
 	@NotNull //Não permite que o campo fique vazio
 	private long quantidade;
 	@NotNull //Não permite que o campo fique vazio
-	private double valor_unitario;
+	private double valorunitario;
 	
 	@ManyToOne //Muitos itens pedidos para um produto
 	private Produto produto;
@@ -59,13 +61,15 @@ public class ItensPedido {
 		this.pedidoestoque = pedidoestoque;
 	}
 
-	public double getValor_unitario() {
-		return valor_unitario;
+	public double getValorunitario() {
+		return valorunitario;
 	}
 
-	public void setValor_unitario(double valor_unitario) {
-		this.valor_unitario = valor_unitario;
+	public void setValorunitario(double valorunitario) {
+		this.valorunitario = valorunitario;
 	}
+
+	
 
 
 
