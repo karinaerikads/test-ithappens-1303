@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 
 
@@ -22,7 +23,7 @@ public class Produto implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long codigo;
-	@NotEmpty //Não permite que o campo fique vazio
+	@NotNull //Não permite que o campo fique vazio
 	private long sequencial;
 	@NotEmpty //Não permite que o campo fique vazio
 	private String codbarras;
