@@ -25,11 +25,12 @@
 				 		<th>Observação</th>
 				 		<th>Tipo</th>
 				 		<th>Valor total</th>
+				 		
 				 	</tr>
 				 </thead>
 				 
 				 <tbody>
-				 	<tr th:each="pedidoestoque: ${pedidoestoque}">
+				 	<tr th:each="pedidoestoque: ${pedidoestoques}">
 				 	<!-- 
 				 		<td><a th:href="${(#mvc.url('EC#detalhesEvento').arg(0, evento.codigo)).build()}"><span th:text="${evento.nome}"></span></a></td> -->
 						
@@ -37,6 +38,10 @@
 						<td><span th:text="${pedidoestoque.observacao}"></span></td>
 						<td><span th:text="${pedidoestoque.tipo}"></span></td>
 						<td><span th:text="${pedidoestoque.valortotal}"></span></td>
+						
+						
+						
+						
 						<!-- 
 						
 						

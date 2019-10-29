@@ -13,11 +13,13 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ithappenstest1303.test1303ithappens.models.Cliente;
+import com.ithappenstest1303.test1303ithappens.models.Filial;
 import com.ithappenstest1303.test1303ithappens.models.ItensPedido;
 import com.ithappenstest1303.test1303ithappens.models.PedidoEstoque;
 import com.ithappenstest1303.test1303ithappens.models.Produto;
 import com.ithappenstest1303.test1303ithappens.models.Usuario;
 import com.ithappenstest1303.test1303ithappens.repository.ClienteRepository;
+import com.ithappenstest1303.test1303ithappens.repository.FilialRepository;
 import com.ithappenstest1303.test1303ithappens.repository.ItensPedidoRepository;
 import com.ithappenstest1303.test1303ithappens.repository.PedidoEstoqueRepository;
 import com.ithappenstest1303.test1303ithappens.repository.ProdutoRepository;
@@ -37,71 +39,20 @@ public class PedidoEstoqueController {
 	private UsuarioRepository ur;
 	@Autowired
 	private ClienteRepository cr;
+	@Autowired
+	private FilialRepository fr;
 
-	//Requisição para retornar o formulário
-	@RequestMapping(value="/pedidoEstoque", method = RequestMethod.GET) //Get pois irá retornar o formulário
-	public String form(){
-		return "funcionalidades/pedidoEstoque";
-	}
 	
-	//Requisição para retornar o formulário com lista de pedidos
-	/*
-	@RequestMapping(value="/listaDePedidos", method = RequestMethod.GET) //Get pois irá retornar o formulário
-	public String formListaPedidos(){
-		return "funcionalidades/listaPedidos";
-	}*/
-	
-	//Retorna lista de pedidos
-	
+	//Retorna lista com todas as pedidos
 	@RequestMapping("/listaPedidos")
 	public ModelAndView listaPedidos(){
-		//mostra a página que ele vai redenrizar os dados do pedido
 		ModelAndView mv = new ModelAndView("listaPedidos");
-		Iterable<PedidoEstoque> pedidoestoque = per.findAll(); //Trás do banco todos os pedidos cadastrados
-		//Passa lista de pedidos para a view
-		mv.addObject("pedidoestoque", pedidoestoque);
-			
+		Iterable<PedidoEstoque> pedidoestoques = per.findAll();
+		mv.addObject("pedidoestoques", pedidoestoques);
 		return mv;
 	}
 	
-	//Retorna formulário para preencher informações do pedido
-	/*
-	@RequestMapping(value="/cadastroPedido", method = RequestMethod.GET) 
-	public String formCadastroPedido(){
-		return "cadastroPedido";
-	}*/
-	
-	//Requisição para salva informações do pedido no banco de dados
-	/*@RequestMapping(value="/cadastroPedido", method = RequestMethod.POST) 
-	public String cadastroPedido(@Valid PedidoEstoque pedidoestoque, BindingResult result, RedirectAttributes attributes){
-		if(result.hasErrors()){
-			attributes.addFlashAttribute("mensagem", "Verifique os campos!");
-			return "redirect:/cadastroPedido";
-		}
 		
-		per.save(pedidoestoque); 
-		attributes.addFlashAttribute("mensagem", "Filial cadastrada com sucesso!");
-		return "redirect:/cadastroFilial";
-	}*/
-	
-	//Salva as informações de um cadastro pedido_estoque
-	@GetMapping("/cadastroPedido/{codigo}")
-	public String cadastroPedido(@PathVariable("codigo") Long codigo, @Valid PedidoEstoque pedidoestoque,  BindingResult result, RedirectAttributes attributes){
-		if(result.hasErrors()){
-			attributes.addFlashAttribute("mensagem", "Verifique os campos!");
-			return "redirect:/usuarios";
-
-			//return "redirect:/cadastroPedido/{codigo}";
-		}
-		Usuario usuario = ur.findByCodigo(codigo);
-		pedidoestoque.setUsuario(usuario);
-		per.save(pedidoestoque);
-		attributes.addFlashAttribute("mensagem", "Pedido adicionado com sucesso!");
-		return "redirect:/listaClientes";
-		
-	}
-	
-	
 	//Mostra lista de clientes e embaixo terá o cadastro do pedido
 	@RequestMapping(value="/{codigo}", method=RequestMethod.GET)
 	public ModelAndView escolheCliente (@PathVariable("codigo") long codigo){
@@ -113,22 +64,43 @@ public class PedidoEstoqueController {
 
 	}
 	
+	//Mostra lista de filiais e embaixo terá o formario de cadastro do pedido estoque
+	@RequestMapping(value="/{codigo}/{codigocliente}", method=RequestMethod.GET)
+	public ModelAndView escolheFilial (@PathVariable("codigo") long codigo, @PathVariable("codigocliente") long codigocliente){
+		ModelAndView mv = new ModelAndView("listaFiliais");
+		Iterable<Filial> filiais = fr.findAll();
+		mv.addObject("filiais", filiais);
+		return mv;
+		
+
+	}
+	
 
 	
-	//vai salvar o cadastro do pedido
-	@RequestMapping(value="/{codigo}", method=RequestMethod.POST)
-	public String salvaPedidoEstoque(@PathVariable("codigo") long codigo, @Valid PedidoEstoque pedidoestoque,  BindingResult result, RedirectAttributes attributes){
+	
+
+
+	@RequestMapping(value="/{codigo}/{codigocliente}", method=RequestMethod.POST)
+	public String salvaPedidoEstoque(@PathVariable("codigo") long codigo, @PathVariable("codigocliente") long codigocliente, @Valid PedidoEstoque pedidoestoque,  BindingResult result, RedirectAttributes attributes){
 		if(result.hasErrors()){
 			attributes.addFlashAttribute("mensagem", "Verifique os campos!");
-			return "redirect:/{codigo}";
+			return "redirect:/{codigo}/{codigocliente}";
 		}
+			
 		Usuario usuario = ur.findByCodigo(codigo);
 		pedidoestoque.setUsuario(usuario);
+			
+		Cliente cliente = cr.findByCodigo(codigocliente);
+		pedidoestoque.setCliente(cliente);
 		per.save(pedidoestoque);
-		
 		attributes.addFlashAttribute("mensagem", "Pedido Estoque adicionado com sucesso!");
 		return "redirect:/{codigo}";
-	}
+			
+			
+		}
+
+		
+	
 	
 	
 	//Busca produto por sequencial
@@ -139,22 +111,5 @@ public class PedidoEstoqueController {
 		mv.addObject("produto", produto);
 		return mv;
 	}
-	
-	
-	//Requisição para salvar os dados do pedido no banco de dados
-		@RequestMapping(value="/pedidoEstoque", method = RequestMethod.POST) 
-		public String form(@Valid ItensPedido itensPedido, PedidoEstoque pedidoEstoque, BindingResult result, RedirectAttributes attributes){
-			if(result.hasErrors()){
-				attributes.addFlashAttribute("mensagem", "Verifique os campos!");
-				return "redirect:/pedidoEstoque";
-			}
-			//Persistindo no banco de dados
 			
-			ipr.save(itensPedido);
-			//per.save(pedidoEstoque);
-			attributes.addFlashAttribute("mensagem", "Pedido cadastrado com sucesso!");
-			return "redirect:/cadastrarEvento";
-		}
-	
-		
 }

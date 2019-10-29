@@ -28,7 +28,7 @@ public class PedidoEstoque implements Serializable {
 	private double valortotal;
 	
 	//Um pedido_estoque para muitos itens_pedido
-	@OneToMany( mappedBy="pedidoestoque", cascade=CascadeType.ALL, orphanRemoval=true)
+	@OneToMany( mappedBy="pedidoestoque", cascade=CascadeType.ALL, orphanRemoval=false)
 	private List<ItensPedido> itenspedido;
 
 	@ManyToOne //Muitos pedidos_estoque um usuário
