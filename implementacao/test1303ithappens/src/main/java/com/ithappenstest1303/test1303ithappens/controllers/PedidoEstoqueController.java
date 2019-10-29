@@ -42,16 +42,23 @@ public class PedidoEstoqueController {
 	@Autowired
 	private FilialRepository fr;
 
-	
 	//Retorna lista com todas as pedidos
 	@RequestMapping("/listaPedidos")
-	public ModelAndView listaPedidos(){
+	public ModelAndView listaPedidossemcadastro(){
 		ModelAndView mv = new ModelAndView("listaPedidos");
 		Iterable<PedidoEstoque> pedidoestoques = per.findAll();
 		mv.addObject("pedidoestoques", pedidoestoques);
 		return mv;
 	}
 	
+	//Retorna lista com todas as pedidos e formulário de cadastro das informações do pedido
+	@RequestMapping("/cadastroPedido/{codigousuario}/{codigocliente}/{codigofilial}")
+	public ModelAndView listaPedidos(){
+		ModelAndView mv = new ModelAndView("cadastroPedido");
+		Iterable<PedidoEstoque> pedidoestoques = per.findAll();
+		mv.addObject("pedidoestoques", pedidoestoques);
+		return mv;
+	}
 		
 	//Mostra lista de clientes e embaixo terá o cadastro do pedido
 	@RequestMapping(value="/{codigo}", method=RequestMethod.GET)
@@ -60,32 +67,13 @@ public class PedidoEstoqueController {
 		Iterable<Cliente> clientes = cr.findAll();
 		mv.addObject("clientes", clientes);
 		return mv;
-		
-
 	}
 	
-	//Mostra lista de filiais e embaixo terá o formario de cadastro do pedido estoque
-	
-	@RequestMapping(value="testecadastropedido/{codigousuario}/{codigocliente}/{codigofilial}", method=RequestMethod.GET)
-	public ModelAndView escolheFilial (@PathVariable("codigousuario") long codigo, @PathVariable("codigocliente") long codigocliente, @PathVariable("codigofilial") long codigofilial){
-		ModelAndView mv = new ModelAndView("listaFiliais");
-		Iterable<Filial> filiais = fr.findAll();
-		mv.addObject("filiais", filiais);
-		return mv;
-		
-
-	}
-	
-
-	
-	
-
-	
-	@RequestMapping(value="testecadastropedido/{codigousuario}/{codigocliente}/{codigofilial}", method=RequestMethod.POST)
+	@RequestMapping(value="cadastroPedido/{codigousuario}/{codigocliente}/{codigofilial}", method=RequestMethod.POST)
 	public String salvaPedidoEstoque(@PathVariable("codigousuario") long codigousuario, @PathVariable("codigocliente") long codigocliente, @PathVariable("codigofilial") long codigofilial, @Valid PedidoEstoque pedidoestoque, BindingResult result, RedirectAttributes attributes){
 		if(result.hasErrors()){
 			attributes.addFlashAttribute("mensagem", "Verifique os campos!");
-			return "redirect:/{codigousuario}/{codigocliente}";
+			return "redirect:/cadastroPedido/{codigousuario}/{codigocliente}/{codigofilial}";
 		}
 			
 		Usuario usuario = ur.findByCodigo(codigousuario);
@@ -93,17 +81,18 @@ public class PedidoEstoqueController {
 			
 		Cliente cliente = cr.findByCodigo(codigocliente);
 		pedidoestoque.setCliente(cliente);
+		
+		Filial filial = fr.findByCodigo(codigofilial);
+		pedidoestoque.setFilial(filial);
+		
 		per.save(pedidoestoque);
 		attributes.addFlashAttribute("mensagem", "Pedido Estoque adicionado com sucesso!");
-		return "redirect:/{codigousuario}";
+		return "redirect:/cadastroPedido/{codigousuario}/{codigocliente}/{codigofilial}";
 			
 			
 		}
 
 		
-	
-	
-	
 	//Busca produto por sequencial
 	@RequestMapping(value="/pedidoEstoque/{sequencial}", method=RequestMethod.GET)
 	public ModelAndView buscarProduto(@PathVariable("sequencial") long sequencial) {
