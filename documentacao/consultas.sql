@@ -20,7 +20,6 @@ inner join  itens_pedido
 on pedido_estoque.codigo = itens_pedido.pedidoestoque_codigo
 where itens_pedido.produto_codigo = 7993;
 
-
 -- Escrever uma consulta que liste os pedidos com suas respectivas formas de pagamento.
 
 select *from pedido_estoque
