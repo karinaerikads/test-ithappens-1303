@@ -42,4 +42,10 @@ INSERT INTO `dbithappens1303`.`forma_pagamento` (`tipo`) VALUES ('débito');
 INSERT INTO `dbithappens1303`.`forma_pagamento` (`tipo`) VALUES ('á vista');
 INSERT INTO `dbithappens1303`.`forma_pagamento` (`tipo`) VALUES ('boleto');
 
+UPDATE `dbithappens1303`.`pedido_estoque` SET `formapagamento_codigo`='1' WHERE `codigo`='1';
+UPDATE `dbithappens1303`.`pedido_estoque` SET `formapagamento_codigo`='2' WHERE `codigo`='2';
+UPDATE `dbithappens1303`.`pedido_estoque` SET `formapagamento_codigo`='3' WHERE `codigo`='3';
+UPDATE `dbithappens1303`.`pedido_estoque` SET `formapagamento_codigo`='2' WHERE `codigo`='4';
+
+
 
