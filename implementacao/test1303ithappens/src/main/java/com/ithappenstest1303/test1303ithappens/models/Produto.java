@@ -30,9 +30,23 @@ public class Produto implements Serializable {
 	@NotEmpty //Não permite que o campo fique vazio
 	private String descricao;
 	
+	//Um cliente para muitos pedidos_estoques
+	@OneToMany( mappedBy="produto", cascade=CascadeType.ALL, orphanRemoval=true)
+	private List<Estoque> estoque;
+	
 	//Um produto para muitos itens_pedido
 	@OneToMany( mappedBy="produto", cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<ItensPedido> itenspedido;
+
+	
+	
+	public List<Estoque> getEstoque() {
+		return estoque;
+	}
+
+	public void setEstoque(List<Estoque> estoque) {
+		this.estoque = estoque;
+	}
 
 	public long getSequencial() {
 		return sequencial;

@@ -38,6 +38,19 @@ public class Filial implements Serializable{
 	private List<PedidoEstoque> pedidoestoque;
 	
 	
+	//Um cliente para muitos pedidos_estoques
+	@OneToMany( mappedBy="filial", cascade=CascadeType.ALL, orphanRemoval=true)
+	private List<Estoque> estoque;
+	
+	
+			
+	
+	public List<Estoque> getEstoque() {
+		return estoque;
+	}
+	public void setEstoque(List<Estoque> estoque) {
+		this.estoque = estoque;
+	}
 	public List<PedidoEstoque> getPedidoestoque() {
 		return pedidoestoque;
 	}

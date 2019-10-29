@@ -14,12 +14,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ithappenstest1303.test1303ithappens.models.Cliente;
 import com.ithappenstest1303.test1303ithappens.models.Filial;
+import com.ithappenstest1303.test1303ithappens.models.FormaPagamento;
 import com.ithappenstest1303.test1303ithappens.models.ItensPedido;
 import com.ithappenstest1303.test1303ithappens.models.PedidoEstoque;
 import com.ithappenstest1303.test1303ithappens.models.Produto;
 import com.ithappenstest1303.test1303ithappens.models.Usuario;
 import com.ithappenstest1303.test1303ithappens.repository.ClienteRepository;
 import com.ithappenstest1303.test1303ithappens.repository.FilialRepository;
+import com.ithappenstest1303.test1303ithappens.repository.FormaPagamentoRepository;
 import com.ithappenstest1303.test1303ithappens.repository.ItensPedidoRepository;
 import com.ithappenstest1303.test1303ithappens.repository.PedidoEstoqueRepository;
 import com.ithappenstest1303.test1303ithappens.repository.ProdutoRepository;
@@ -39,7 +41,8 @@ public class PedidoEstoqueController {
 	private ClienteRepository cr;
 	@Autowired
 	private FilialRepository fr;
-
+	@Autowired
+	FormaPagamentoRepository fpr;
 	//Retorna lista com todas as pedidos
 	@RequestMapping("/listaPedidos")
 	public ModelAndView listaPedidossemcadastro(){
@@ -50,7 +53,7 @@ public class PedidoEstoqueController {
 	}
 	
 	//Retorna lista com todas as pedidos e formulário de cadastro das informações do pedido
-	@RequestMapping("/cadastroPedido/{codigousuario}/{codigocliente}/{codigofilial}")
+	@RequestMapping("/cadastroPedido/{codigousuario}/{codigocliente}/{codigofilial}/{codigoformapagamento}")
 	public ModelAndView listaPedidos(){
 		ModelAndView mv = new ModelAndView("cadastroPedido");
 		Iterable<PedidoEstoque> pedidoestoques = per.findAll();
@@ -67,11 +70,11 @@ public class PedidoEstoqueController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/cadastroPedido/{codigousuario}/{codigocliente}/{codigofilial}", method=RequestMethod.POST)
-	public String salvaPedidoEstoque(@PathVariable("codigousuario") long codigousuario, @PathVariable("codigocliente") long codigocliente, @PathVariable("codigofilial") long codigofilial, @Valid PedidoEstoque pedidoestoque, BindingResult result, RedirectAttributes attributes){
+	@RequestMapping(value="/cadastroPedido/{codigousuario}/{codigocliente}/{codigofilial}/{codigoformapagamento}", method=RequestMethod.POST)
+	public String salvaPedidoEstoque(@PathVariable("codigousuario") long codigousuario, @PathVariable("codigocliente") long codigocliente, @PathVariable("codigofilial") long codigofilial, @PathVariable("codigoformapagamento") long codigoformapagamento, @Valid PedidoEstoque pedidoestoque, BindingResult result, RedirectAttributes attributes){
 		if(result.hasErrors()){
 			attributes.addFlashAttribute("mensagem", "Verifique os campos!");
-			return "redirect:/cadastroPedido/{codigousuario}/{codigocliente}/{codigofilial}";
+			return "redirect:/cadastroPedido/{codigousuario}/{codigocliente}/{codigofilial}/{codigoformapagamento}";
 		}
 			
 		Usuario usuario = ur.findByCodigo(codigousuario);
@@ -83,9 +86,12 @@ public class PedidoEstoqueController {
 		Filial filial = fr.findByCodigo(codigofilial);
 		pedidoestoque.setFilial(filial);
 		
+		FormaPagamento formapagamento = fpr.findByCodigo(codigoformapagamento);
+		pedidoestoque.setFormapagamento(formapagamento);
+		
 		per.save(pedidoestoque);
 		attributes.addFlashAttribute("mensagem", "Pedido Estoque adicionado com sucesso!");
-		return "redirect:/cadastroPedido/{codigousuario}/{codigocliente}/{codigofilial}";
+		return "redirect:/cadastroPedido/{codigousuario}/{codigocliente}/{codigofilial}/{codigoformapagamento}";
 			
 			
 		}

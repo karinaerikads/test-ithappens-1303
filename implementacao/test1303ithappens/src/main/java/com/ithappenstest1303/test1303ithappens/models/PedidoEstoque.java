@@ -30,7 +30,7 @@ public class PedidoEstoque implements Serializable {
 	//Um pedido_estoque para muitos itens_pedido
 	@OneToMany( mappedBy="pedidoestoque", cascade=CascadeType.ALL, orphanRemoval=false)
 	private List<ItensPedido> itenspedido;
-
+	
 	@ManyToOne //Muitos pedidos_estoque um usuário
 	private Usuario usuario;
 	
@@ -39,6 +39,10 @@ public class PedidoEstoque implements Serializable {
 	
 	@ManyToOne //Muitos pedidos_estoque uma filia
 	private Filial filial;
+	
+	@ManyToOne //Muitos pedidos_estoque uma filia
+	private FormaPagamento formapagamento;
+	
 	
 	
 	public Filial getFilial() {
@@ -105,6 +109,17 @@ public class PedidoEstoque implements Serializable {
 		this.tipo = tipo;
 	}
 
+	public FormaPagamento getFormapagamento() {
+		return formapagamento;
+	}
 
+	public void setFormapagamento(FormaPagamento formapagamento) {
+		this.formapagamento = formapagamento;
+	}
+
+	
+	
+	
+	
 	
 }
