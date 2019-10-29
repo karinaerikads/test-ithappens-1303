@@ -25,31 +25,31 @@ public class UsuarioController {
 	private UsuarioRepository ur;
 	
 	//Retorna lista de usuário
-	@RequestMapping("/usuarios")
+	@RequestMapping("/listaUsuarios")
 	public ModelAndView listaUsuarios(){
-		ModelAndView mv = new ModelAndView("usuarios");
+		ModelAndView mv = new ModelAndView("listaUsuarios");
 		Iterable<Usuario> usuarios = ur.findAll();
 		mv.addObject("usuarios", usuarios);
 		return mv;
 	}
 	
 	//Requisição para salvar usuário no banco de dados
-	@RequestMapping(value="/cadastrousuario", method = RequestMethod.POST) 
+	@RequestMapping(value="/cadastroUsuario", method = RequestMethod.POST) 
 	public String form(@Valid Usuario usuario, BindingResult result, RedirectAttributes attributes){
 		if(result.hasErrors()){
 			attributes.addFlashAttribute("mensagem", "Verifique os campos!");
-			return "redirect:/cadastrousuario";
+			return "redirect:/cadastroUsuario";
 		}
 		//Persistindo evento no banco de dados
 		ur.save(usuario); //Salva evento no banco de dados
 		attributes.addFlashAttribute("mensagem", "Usuario cadastrado com sucesso!");
-		return "redirect:/cadastrousuario";
+		return "redirect:/cadastroUsuario";
 	}
 	
 	//Requisição para retornar o formulário
-	@RequestMapping(value="/cadastrousuario", method = RequestMethod.GET) //Get pois irá retornar o formulário
+	@RequestMapping(value="/cadastroUsuario", method = RequestMethod.GET) //Get pois irá retornar o formulário
 	public String form(){
-		return "cadastrousuario";
+		return "cadastroUsuario";
 	}
 	
 		

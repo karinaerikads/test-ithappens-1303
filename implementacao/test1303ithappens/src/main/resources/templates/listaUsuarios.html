@@ -22,7 +22,17 @@
 <body>
 
 	 <div th:insert="~{menu :: menupag}"></div>
- 	 <h5 class="center">Lista de usuarios</h5>
+	 	
+	 		<h5 class="center">Lista de usuarios           <a class="center waves-effect waves-light btn" th:href="@{/cadastroUsuario}"><i class="material-icons left">add</i>Cadastrar</a>
+	 		
+	 	</h5>
+ 	 
+ 	 							
+ 	 
+				
+				
+							
+				
 	 <table class="container striped">
 		 <thead>
 		 	<tr>
@@ -31,8 +41,9 @@
 		 		<th>Email</th>
 		 		<th>Nome</th>
 		 		<th>Deletar</th>
+		 		<!-- 
 		 		<th>Cadastrar pedido</th>
-		 	
+		 	    -->
 
 		 	</tr>
 		 </thead>
@@ -40,8 +51,6 @@
 		 <tbody>
 		 	<tr th:each="usuario: ${usuarios}">
 		 		
-				
-				
 				<td><span th:text="${usuario.codigo}"></span></td>
 				<td><span th:text="${usuario.cpf}"></span></td>
 				<td><span th:text="${usuario.email}"></span></td>
@@ -50,9 +59,9 @@
 				
 				
 				
-				
-				<td><a class="waves-effect waves-light small" th:href="@{/{codigo}(codigo=${usuario.codigo})}"><i class="material-icons left">add</i></a></td>
-				
+				<!-- 
+				<td><a class="waves-effect waves-light small" th:href="@{/{codigousuario}(codigousuario=${usuario.codigo})}"><i class="material-icons left">add</i></a></td>
+				 -->
 				
 			</tr>
 		 </tbody>	 

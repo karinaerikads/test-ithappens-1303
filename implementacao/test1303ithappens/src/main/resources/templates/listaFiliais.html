@@ -8,7 +8,7 @@
 	<!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/materialize/css/materialize.min.css}"  media="screen,projection"/>
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -22,7 +22,9 @@
 <body>
 
 	 <div th:insert="~{menu :: menupag}"></div>
- 	 <h5 class="center">Lista de filiais</h5>
+ 	 <h5 class="center">Lista de filiais <a class="center waves-effect waves-light btn" th:href="@{/cadastroFilial}"><i class="material-icons left">add</i>Cadastrar</a>
+	 </h5>
+ 	 
 	 <table class="container striped">
 		 <thead>
 		 	<tr>
@@ -58,7 +60,7 @@
 			</tr>
 		 </tbody>	 
 	</table>
-	
+	<!-- 
 			<h5 class="center">Cadastrar informações do pedido</h5>
 	
 	<th:block th:include='mensagemValidacao'></th:block>
@@ -77,7 +79,7 @@
 			
 		</form>
 	</div>
-	
+	 -->
 	
 	
 	<!--JavaScript at end of body for optimized loading-->

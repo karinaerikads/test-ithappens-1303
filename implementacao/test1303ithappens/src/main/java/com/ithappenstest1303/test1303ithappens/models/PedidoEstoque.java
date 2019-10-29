@@ -36,9 +36,19 @@ public class PedidoEstoque implements Serializable {
 	
 	@ManyToOne //Muitos pedidos_estoque um cliente
 	private Cliente cliente;
+	
+	@ManyToOne //Muitos pedidos_estoque uma filia
+	private Filial filial;
+	
+	
+	public Filial getFilial() {
+		return filial;
+	}
 
-	
-	
+	public void setFilial(Filial filial) {
+		this.filial = filial;
+	}
+
 	public Cliente getCliente() {
 		return cliente;
 	}

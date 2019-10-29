@@ -4,25 +4,33 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <body>
 	<div th:fragment="menupag">
 		<header>
-			<nav class="white" role="navigation">
+			<nav role="navigation">
 			    <div class="nav-wrapper container">
-			      <a id="logo-container" href="#" class="brand-logo">Logo</a>
+			      <a id="logo-container" href="/" class="brand-logo">Logo</a>
 			      <ul class="right hide-on-med-and-down">
-			        <li><a href="/pedidoEstoque">Pedido</a></li>
+			        <li><a href="/listaPedidos">Pedidos</a></li>
+
+			        <li><a href="/listaUsuarios">Usuarios</a></li>
+
+			        <li><a href="/listaFiliais">Filiais</a></li>
+			        <li><a href="/listaClientes">Clientes</a></li>
+			        <li><a href="/listaClientes">Produtos</a></li>
+			        
+			      </ul>
+			
+			      <ul id="nav-mobile" class="sidenav">
+			      
+			       <li><a href="/pedidoEstoque">Pedido</a></li>
 			        <li><a href="/listaPedidos">List pedidos</a></li>
-			        <li><a href="/usuarios">Usuarios</a></li>
 			        <li><a href="/cadastrousuario">Cad usuario</a></li>
 			        <li><a href="/cadastroFilial">Cad filial</a></li>
 			        <li><a href="/listaFiliais">List filiais</a></li>
 			        <li><a href="/cadastroCliente">Cad de cliente</a></li>
 			        <li><a href="/listaClientes">List cliente</a></li>
 			        <li><a href="/cadastroPedido">Cad pedido</a></li>
-			        
-			        
-			        
-			      </ul>
-			
-			      <ul id="nav-mobile" class="sidenav">
+			      
+			      
+			      
 			        <li><a href="/pedidoEstoque">Pedido</a></li>
 			        <li><a href="/listaPedidos">Lista de pedidos</a></li>
 			        <li><a href="/cadastrousuario">Cadastro usuario</a></li>

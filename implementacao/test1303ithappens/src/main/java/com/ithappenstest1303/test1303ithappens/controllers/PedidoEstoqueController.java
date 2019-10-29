@@ -65,8 +65,9 @@ public class PedidoEstoqueController {
 	}
 	
 	//Mostra lista de filiais e embaixo terá o formario de cadastro do pedido estoque
-	@RequestMapping(value="/{codigo}/{codigocliente}", method=RequestMethod.GET)
-	public ModelAndView escolheFilial (@PathVariable("codigo") long codigo, @PathVariable("codigocliente") long codigocliente){
+	
+	@RequestMapping(value="testecadastropedido/{codigousuario}/{codigocliente}/{codigofilial}", method=RequestMethod.GET)
+	public ModelAndView escolheFilial (@PathVariable("codigousuario") long codigo, @PathVariable("codigocliente") long codigocliente, @PathVariable("codigofilial") long codigofilial){
 		ModelAndView mv = new ModelAndView("listaFiliais");
 		Iterable<Filial> filiais = fr.findAll();
 		mv.addObject("filiais", filiais);
@@ -79,22 +80,22 @@ public class PedidoEstoqueController {
 	
 	
 
-
-	@RequestMapping(value="/{codigo}/{codigocliente}", method=RequestMethod.POST)
-	public String salvaPedidoEstoque(@PathVariable("codigo") long codigo, @PathVariable("codigocliente") long codigocliente, @Valid PedidoEstoque pedidoestoque,  BindingResult result, RedirectAttributes attributes){
+	
+	@RequestMapping(value="testecadastropedido/{codigousuario}/{codigocliente}/{codigofilial}", method=RequestMethod.POST)
+	public String salvaPedidoEstoque(@PathVariable("codigousuario") long codigousuario, @PathVariable("codigocliente") long codigocliente, @PathVariable("codigofilial") long codigofilial, @Valid PedidoEstoque pedidoestoque, BindingResult result, RedirectAttributes attributes){
 		if(result.hasErrors()){
 			attributes.addFlashAttribute("mensagem", "Verifique os campos!");
-			return "redirect:/{codigo}/{codigocliente}";
+			return "redirect:/{codigousuario}/{codigocliente}";
 		}
 			
-		Usuario usuario = ur.findByCodigo(codigo);
+		Usuario usuario = ur.findByCodigo(codigousuario);
 		pedidoestoque.setUsuario(usuario);
 			
 		Cliente cliente = cr.findByCodigo(codigocliente);
 		pedidoestoque.setCliente(cliente);
 		per.save(pedidoestoque);
 		attributes.addFlashAttribute("mensagem", "Pedido Estoque adicionado com sucesso!");
-		return "redirect:/{codigo}";
+		return "redirect:/{codigousuario}";
 			
 			
 		}
